@@ -1,7 +1,7 @@
 <template>
   <div>
-    <input v-model="siteUrl" placeholder="Enter a site URL, e.g., https://example.com" />
-    <button @click="handleFetch">Fetch Metadata</button>
+    <input v-model="siteLink" placeholder="Enter a site URL" />
+    <button @click="handleFetch">Create Preview</button>
 
     <div v-if="loading">Loading…</div>
     <div v-else-if="error">{{ error }}</div>
@@ -16,15 +16,12 @@
 import { ref } from "vue";
 import { useFetchMetaData } from "~/composables/useFetchMetaData";
 
-// A reactive field for the user-entered URL
-const siteUrl = ref("");
+const siteLink = ref("");
 
-// Pull in our composable
 const { metadata, loading, error, fetchMetaData } = useFetchMetaData();
 
 function handleFetch() {
-  const url = siteUrl.value.trim();
-  // If user forgot to type "https://", optionally prepend:
+  const url = siteLink.value.trim();
   if (url && !/^https?:\/\//i.test(url)) {
     fetchMetaData(`https://${url}`);
   } else if (url) {
