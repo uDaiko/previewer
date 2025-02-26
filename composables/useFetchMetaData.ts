@@ -1,8 +1,11 @@
 import { ref } from "vue";
 
 interface MetaData {
+  site_name?: string;
   title?: string;
   description?: string;
+  ogUrl?: string;
+  image?: string;
 }
 
 export function useFetchMetaData() {
