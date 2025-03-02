@@ -1,13 +1,19 @@
 <template>
-  <div>
-    <input v-model="siteLink" placeholder="Enter a site URL" />
-    <button @click="handleFetch">Create Preview</button>
+  <div class="flex flex-col items-center h-screen bg-gray-100">
+    <div class="flex flex-col items-center gap-4 pt-8">
+      <input v-model="siteLink" placeholder="Enter a site URL" @keyup.enter="handleFetch"
+        class="p-3 w-72 border border-gray-300 rounded-md text-lg" />
+      <button @click="handleFetch" class="p-3 bg-blue-500 text-white rounded-md text-lg hover:bg-blue-600">
+        Create Preview
+      </button>
+    </div>
 
-    <div v-if="loading">Loading…</div>
-    <div v-else-if="error">{{ error }}</div>
-    <div v-else-if="metadata">
-      <h3>Title: {{ metadata.title }}</h3>
-      <p>Description: {{ metadata.description }}</p>
+    <div v-if="loading" class="text-xl text-center mt-8">Loading…</div>
+    <div v-else-if="error" class="text-xl text-center mt-8 text-red-500">{{ error }}</div>
+    <div v-else-if="metadata" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- <XPreview :metadata="metadata" /> -->
+      <DiscordPreview :metadata="metadata" />
+      <FacebookPreview :metadata="metadata" />
     </div>
   </div>
 </template>
