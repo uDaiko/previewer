@@ -1,8 +1,16 @@
+<script setup lang="ts">
+import type { WebsiteMetadata } from '~/server/services/WebsiteMetadataService';
+
+const props = defineProps<{
+    metadata: WebsiteMetadata;
+}>();
+
+</script>
 <template>
     <!-- Discord Preview -->
     <div class="bg-white rounded-lg shadow-md overflow-hidden">
         <div class="p-4 border-b border-gray-200">
-            <h2 class="text-lg font-semibold flex items-center">
+            <h2 class="text-lg font-semibold flex items-center text-black">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
                     <circle cx="9" cy="12" r="1"></circle>
@@ -19,12 +27,12 @@
                 Discord Preview
             </h2>
         </div>
-        <div class="p-4">
-            <div class="bg-gray-800 rounded-lg overflow-hidden text-white">
-                <div class="p-3 border-l-4 border-blue-500 text-left">
-                    <div class="text-gray-400 text-xs mt-2">{{ metadata.site_name }}</div>
-                    <div class="text-blue-700 text-sm line-clamp-2">{{ metadata.description }}</div>
-                    <div class="font-bold">{{ metadata.title || 'No title available' }}</div>
+        <div class="p-2">
+            <div class="bg-gray-700  overflow-hidden text-white">
+                <div class="pt-2 px-3 border-l-4 border-blue-500">
+                    <div class="text-white text-xs mt-2 pb-1">{{ metadata.site_name }}</div>
+                    <div class="font-bold text-blue-600 pb-1">{{ metadata.title }}</div>
+                    <div class="text-white text-sm line-clamp-2 pb-4">{{ metadata.description }}</div>
                     <div v-if="metadata.image" class="w-full h-48 bg-gray-700 rounded mb-2">
                         <img :src="metadata.image" alt="Preview" class="w-full h-full object-cover rounded" />
                     </div>
@@ -33,23 +41,3 @@
         </div>
     </div>
 </template>
-
-<script setup lang="ts">
-const props = defineProps<{
-    metadata: Metadata;
-}>();
-
-interface Metadata {
-    site_name?: string
-    title?: string;
-    description?: string;
-    image?: string;
-    ogUrl?: string;
-}
-</script>
-
-
-
-<style scoped>
-/* Optional styles for rounded corners and shadow */
-</style>
