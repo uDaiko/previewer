@@ -1,16 +1,17 @@
 import { ref } from "vue";
+import type { WebsiteMetadata } from "~/server/services/WebsiteMetadataService";
 
-interface MetaData {
-  site_name?: string;
-  title?: string;
-  description?: string;
-  ogUrl?: string;
-  image?: string;
-}
+// interface MetaData {
+//   site_name?: string;
+//   title?: string;
+//   description?: string;
+//   ogUrl: string;
+//   image?: string;
+// }
 
 export function useFetchMetaData() {
-  const metadata = ref<MetaData | null>(null);
-  const loading = ref(false);
+  const metadata = ref<WebsiteMetadata | null>(null);
+  const loading = ref<boolean>(false);
   const error = ref<string | null>(null);
 
   async function fetchMetaData(url: string) {
@@ -21,7 +22,7 @@ export function useFetchMetaData() {
 
       const result = await $fetch<{
         success: boolean;
-        data: MetaData;
+        data: WebsiteMetadata;
       }>(`/api/fetch-metadata?url=${url}`);
 
       metadata.value = result.data ?? {};

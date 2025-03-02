@@ -1,11 +1,11 @@
 import { JSDOM } from "jsdom";
 
 export interface WebsiteMetadata {
-  site_name?: string;
-  title?: string;
-  description?: string;
-  ogUrl?: string;
-  image?: string;
+  site_name: string;
+  title: string;
+  description: string;
+  ogUrl: string;
+  image: string;
 }
 
 export class WebsiteMetadataService {
@@ -39,11 +39,11 @@ export class WebsiteMetadataService {
         ?.trim();
 
       return {
-        site_name,
-        title,
-        description,
-        ogUrl,
-        image,
+        site_name: site_name ?? "",
+        title: title ?? "",
+        description: description ?? "",
+        ogUrl: ogUrl ?? "",
+        image: image ?? "",
       };
     } catch (error) {
       throw new Error(`Failed to fetch website metadata: ${String(error)}`);
