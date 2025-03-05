@@ -1,17 +1,31 @@
 <template>
-  <div class="flex flex-col items-center h-screen bg-gray-100">
-    <div class="flex flex-col items-center gap-4 pt-8">
-      <input v-model="siteLink" placeholder="Enter a site URL" @keyup.enter="handleFetch"
-        class="p-3 w-72 border border-gray-300 rounded-md text-lg" />
-      <button @click="handleFetch" class="p-3 bg-blue-500 text-white rounded-md text-lg hover:bg-blue-600">
-        Create Preview
-      </button>
+  <div class="flex flex-col items-center min-h-screen bg-gray-100 p-6">
+    <div class="max-w-3xl w-full">
+      <h1 class="text-3xl font-bold text-center mb-8 text-black">Previewer</h1>
+
+      <!-- URL Input Form -->
+      <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+        <div class="flex flex-col items-center gap-4">
+          <input v-model="siteLink" type="url" placeholder="Enter a site URL" required @keyup.enter="handleFetch"
+            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600" />
+          <button @click="handleFetch"
+            class="w-full sm:w-auto px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
+            :disabled="loading">
+            {{ loading ? 'Loading...' : 'Create Preview' }}
+          </button>
+        </div>
+      </div>
     </div>
 
+    <!-- Loading Indicator -->
     <div v-if="loading" class="text-xl text-center mt-8">Loading…</div>
-    <div v-else-if="error" class="text-xl text-center mt-8 text-red-500">{{ error }}</div>
-    <div v-else-if="metadata" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <!-- <XPreview :metadata="metadata" /> -->
+
+    <!-- Error Message -->
+    <div v-if="error" class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded-md">
+      <p>{{ error }}</p>
+    </div>
+    <div v-else-if="metadata" class="grid grid-cols-1 md:grid-cols-3 gap-2">
+      <XPreview :metadata="metadata" />
       <DiscordPreview :metadata="metadata" />
       <FacebookPreview :metadata="metadata" />
     </div>
@@ -34,4 +48,6 @@ function handleFetch() {
     fetchMetaData(url);
   }
 }
+console.log("twitter meta")
+console.log(metadata)
 </script>
