@@ -10,9 +10,7 @@ const formatUrl = (urlString: string) =>
     .split('/')[0];      
 </script>
 <template>
-
-  <!-- Facebook Preview -->
-  <div class="bg-white rounded-lg shadow-md overflow-hidden">
+  <div class="bg-white rounded-lg shadow-md overflow-hidden w-full h-96">
     <div class="p-4 border-b border-gray-200">
       <h2 class="text-lg font-semibold flex items-center text-black">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -22,15 +20,13 @@ const formatUrl = (urlString: string) =>
         Facebook Preview
       </h2>
     </div>
-    <div class="p-2">
-      <div class="border border-gray-200 overflow-hidden bg-gray-200">
-        <div v-if="metadata.image" class="w-full h-48 bg-gray-100">
-          <img :src="metadata.image" alt="Preview" class="w-full h-full object-cover" />
-        </div>
-        <div class="p-3">
-          <div class="text-gray-500 text-sm">{{ formatUrl(metadata.ogUrl) }}</div>
-          <div class="font-bold text-black">{{ metadata.title || 'No title available' }}</div>
-        </div>
+    <div class="border border-gray-200 overflow-hidden bg-gray-200">
+      <div v-if="metadata.image" class="w-full h-48 bg-gray-100">
+        <img :src="metadata.image" alt="Preview" class="w-full h-full object-cover" />
+      </div>
+      <div class="p-3">
+        <div class="text-gray-500 text-sm">{{ formatUrl(metadata.ogUrl) }}</div>
+        <div class="font-bold text-black">{{ metadata.title || 'No title available' }}</div>
       </div>
     </div>
   </div>
