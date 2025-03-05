@@ -36,7 +36,7 @@ const domain = computed(() => {
                 <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/70"></div>
             </div>
             <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
-                <div class="bg-black bg-opacity-70 p-2 rounded inline-block">
+                <div class="bg-black bg-opacity-70 p-1 rounded inline-block">
                     <div class="text-sm font-medium text-white line-clamp-2">
                         {{ metadata.twitter_title || metadata.title || 'No title available' }}
                     </div>
