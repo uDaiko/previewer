@@ -6,6 +6,7 @@ export interface WebsiteMetadata {
   description: string;
   ogUrl: string;
   image: string;
+  twitter_title: string;
 }
 
 export class WebsiteMetadataService {
@@ -37,6 +38,10 @@ export class WebsiteMetadataService {
         .querySelector('meta[property="og:image"]')
         ?.getAttribute("content")
         ?.trim();
+      const twitter_title = document
+        .querySelector('meta[property="twitter:title"]')
+        ?.getAttribute("content")
+        ?.trim();
 
       return {
         site_name: site_name ?? "",
@@ -44,6 +49,7 @@ export class WebsiteMetadataService {
         description: description ?? "",
         ogUrl: ogUrl ?? "",
         image: image ?? "",
+        twitter_title: twitter_title ?? "",
       };
     } catch (error) {
       throw new Error(`Failed to fetch website metadata: ${String(error)}`);
